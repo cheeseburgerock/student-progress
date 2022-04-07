@@ -45,6 +45,15 @@ const TestSessionResult = sequelize.define('test_session_result', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
+const TestQuestionTestSessionResult = sequelize.define('test_question_test_session_result', {   //таблица для связи 5 many-to-many
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
+})
+
+const TestAnswerTestSessionResult = sequelize.define('test_answer_test_session_result', {   //таблица для связи 6 many-to-many
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
+})
+
+
 Subject.hasMany(Test)                           //1
 Test.belongsTo(Subject)
 
@@ -57,11 +66,11 @@ TestSession.belongsTo(Test)
 TestQuestion.hasMany(TestAnswer)                //4
 TestAnswer.belongsTo(TestQuestion)
 
-TestQuestion.hasMany(TestSessionResult)         //5
-TestSessionResult.belongsTo(TestQuestion)
+TestQuestion.belongsToMany(TestSessionResult, {through: TestQuestionTestSessionResult})         //5
+TestSessionResult.belongsToMany(TestQuestion, {through: TestQuestionTestSessionResult})
 
-TestAnswer.hasMany(TestSessionResult)           //6
-TestSessionResult.belongsTo(TestAnswer)
+TestAnswer.belongsToMany(TestSessionResult, {through: TestAnswerTestSessionResult})           //6
+TestSessionResult.belongsToMany(TestAnswer, {through: TestAnswerTestSessionResult}) 
 
 User.hasMany(TestSession)                       //7
 TestSession.belongsTo(User)
@@ -76,5 +85,7 @@ Test,
 TestQuestion,
 TestAnswer,
 TestSession,
-TestSessionResult
+TestSessionResult,
+TestQuestionTestSessionResult,
+TestAnswerTestSessionResult
 }
