@@ -1,8 +1,11 @@
 const Router = require('express')
 const router = new Router()
+const testSessionResultController = require('../controllers/testSessionResultController')
 
-router.post('/',)
-router.get('/',)
-router.get('/:id',)
+router.post('/',testSessionResultController.create)
+router.get('/',testSessionResultController.getAll)
+router.get('/:id',testSessionResultController.getOne)
+router.delete('/:id', testSessionResultController.deleteOne)
+
 
 module.exports = router

@@ -13,10 +13,10 @@ app.use(cors())
 app.use(express.json())
 app.use('/api', router)
 
+app.use(errorHandler) //Обработка ошибок (должна быть в конце)
 
 
-//Обработка ошибок (должна быть в конце)
-app.use(errorHandler)
+
 
 const start = async () => {
     try {

@@ -14,6 +14,6 @@ router.use('/test', testRouter)
 router.use('/testQuestion', testQuestionRouter)
 router.use('/testAnswer', testAnswerRouter)
 router.use('/testSession',testSessionRouter)
-router.use('/TestSessionResult',testSessionResultRouter)
+router.use('/testSessionResult',testSessionResultRouter)
 
 module.exports = router

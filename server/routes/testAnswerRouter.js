@@ -1,8 +1,12 @@
 const Router = require('express')
 const router = new Router()
+const testAnswerController = require('../controllers/testAnswerController')
 
-router.post('/',)
-router.get('/',)
-router.get('/:id',)
+router.post('/', testAnswerController.create)
+router.get('/', testAnswerController.getAll)
+router.get('/:id', testAnswerController.getOne)
+router.delete('/:id', testAnswerController.deleteOne)
+
+
 
 module.exports = router

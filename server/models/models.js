@@ -91,7 +91,7 @@ Test,
 TestQuestion,
 TestAnswer,
 TestSession,
-TestSessionResult,
+TestSessionResult
 //TestQuestionTestSessionResult,
 //TestAnswerTestSessionResult
 }
