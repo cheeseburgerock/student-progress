@@ -1,5 +1,8 @@
 const ApiError = require('../error/ApiError');
 const { User } = require('../models/models');
+const uuid = require('uuid');
+const path = require('path');
+
 
 class UserController {
     async registration(req, res){
@@ -40,7 +43,12 @@ class UserController {
 
         try{
             const {email, password, name, role, group} = req.body
-            const user = await User.create({email, password, name, role, group})
+            const {img} = req.files
+            let fileName = uuid.v4() + ".jpg"
+            img.mv(path.resolve(__dirname, '..', 'static', fileName)) //переносим файл с заданным именем в папку 
+
+            const user = await User.create({email, password, name, role, group, img: fileName})
+
             return res.json(user)
         } catch (e) {
             next(ApiError.badRequest(e.message))
