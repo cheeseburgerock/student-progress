@@ -34,6 +34,29 @@ class TestAnswerController {
         )
         return res.json(testAnswer)
     }
+
+    async updateOne(req, res){
+       
+        try{
+            const {id}= req.query //берем id из строки запроса
+            const {name, testQuestionId, is_right} = req.body //получаем поля из таблицы
+
+            let testAnswer = await TestAnswer.update(
+                {
+                    name: name, 
+                    testQuestionId: testQuestionId, 
+                    is_right: is_right
+                }, 
+                {
+                    where:{id}
+                }
+            )
+            return res.json(testAnswer)
+
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
 }
 
 module.exports = new TestAnswerController()

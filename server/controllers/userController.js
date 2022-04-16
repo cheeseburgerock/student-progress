@@ -18,8 +18,22 @@ class UserController {
         res.json(id);
     }
 
-    async getOne(req, res){
 
+
+
+
+
+    async getAll(req, res){
+        const users = await User.findAll()
+        return res.json(users)
+    }
+
+    async getOne(req, res){
+        const {id} = req.params
+        const user = await User.findOne(
+            {where: {id}},
+        )
+        return res.json(user)
     }
 
     async create(req, res, next){
@@ -33,11 +47,38 @@ class UserController {
         }
     }
 
-    async getAll(req, res){
-        const users = await User.findAll()
-        return res.json(users)
+    async updateOne(req, res){
+       
+        try{
+            const {id}= req.query                                           //берем id из строки запроса
+            const {email, password, name, role, group} = req.body            //получаем поля из таблицы
+
+            let user = await User.update(
+                {
+                    email: email, 
+                    password: password,
+                    name: name,
+                    role: role,
+                    group: group
+                }, 
+                {
+                    where:{id}
+                }
+            )
+            return res.json(user)
+
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
     }
 
+    async deleteOne(req, res){
+        const {id} = req.params
+        const user = await User.destroy(
+            {where: {id}},
+        )
+        return res.json(user)
+    }
 
 }
 

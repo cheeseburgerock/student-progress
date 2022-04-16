@@ -47,9 +47,8 @@ class SubjectController {
     async updateOne(req, res){
        
         try{
-            
             const {id}= req.query //берем id из строки запроса
-            const {name, description, professor} = req.body //получаем эти поля из таблицы?
+            const {name, description, professor} = req.body //получаем поля из таблицы
 
             let subject = await Subject.update(
                 {
@@ -66,13 +65,8 @@ class SubjectController {
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
-
-
     }
 
-
-
-    
 
 }
 

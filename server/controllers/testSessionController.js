@@ -42,6 +42,29 @@ class TestSessionController {
         return res.json(testSession)
     }
 
+    async updateOne(req, res){
+       
+        try{
+            const {id}= req.query //берем id из строки запроса
+            const {execution_date, testId, userId} = req.body //получаем поля из таблицы
+
+            let testSession = await TestSession.update(
+                {
+                    execution_date: execution_date, 
+                    testId: testId,
+                    userId: userId
+                }, 
+                {
+                    where:{id}
+                }
+            )
+            return res.json(testSession)
+
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
 }
 
 module.exports = new TestSessionController()

@@ -6,6 +6,7 @@ router.post('/', testAnswerController.create)
 router.get('/', testAnswerController.getAll)
 router.get('/:id', testAnswerController.getOne)
 router.delete('/:id', testAnswerController.deleteOne)
+router.put('/', testAnswerController.updateOne)
 
 
 
