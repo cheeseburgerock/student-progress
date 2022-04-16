@@ -60,6 +60,7 @@ class UserController {
         try{
             const {id}= req.query                                           //берем id из строки запроса
             const {email, password, name, role, group} = req.body            //получаем поля из таблицы
+            let fileName = uuid.v4() + ".jpg"
 
             let user = await User.update(
                 {
@@ -67,7 +68,8 @@ class UserController {
                     password: password,
                     name: name,
                     role: role,
-                    group: group
+                    group: group,
+                    img: fileName
                 }, 
                 {
                     where:{id}

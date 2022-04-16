@@ -22,7 +22,20 @@ class TestSessionController {
     }
 
     async getAll(req, res){
-        const testSessions = await TestSession.findAll()
+        const {testId, userId}= req.query
+        let testSessions;
+        if (!testId && !userId) {
+            testSessions = await TestSession.findAll()    
+        }
+        if (testId && !userId) {
+            testSessions = await TestSession.findAll({where:{testId}})    
+        }
+        if (!testId && userId) {
+            testSessions = await TestSession.findAll({where:{userId}})    
+        }
+        if (testId && userId) {
+            testSessions = await TestSession.findAll({where:{testId, userId}})    
+        }
         return res.json(testSessions)
     }
 

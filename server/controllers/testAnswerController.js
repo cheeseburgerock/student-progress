@@ -15,8 +15,17 @@ class TestAnswerController {
     }
 
     async getAll(req, res){
-        const testAnswers = await TestAnswer.findAll()
+        
+        const {testQuestionId}= req.query
+        let testAnswers;
+        if (!testQuestionId) {
+            testAnswers = await TestAnswer.findAll()    
+        }
+        if (testQuestionId) {
+            testAnswers = await TestAnswer.findAll({where:{testQuestionId}})    
+        }
         return res.json(testAnswers)
+
     }
 
     async getOne(req, res){
