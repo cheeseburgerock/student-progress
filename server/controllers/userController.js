@@ -15,6 +15,8 @@ const generateJwt = (id, email, name, role, group) => {
 
 
 class UserController {
+    
+
     async registration(req, res, next){
         const {email, password, name, role, group} = req.body
         const {img} = req.files
@@ -34,9 +36,27 @@ class UserController {
         const token = generateJwt(user.id, user.email, user.name, user.role, user.group, user.img)
             return res.json({token})  
     }
+    
 
-    async login(req, res){
-        
+    async login(req, res, next){
+
+        try {
+            const {email, password} = req.body
+            const user = await User.findOne({where: {email}})
+            if (!user) {
+                return next(ApiError.internal('Пользователь с таким email не найден'))
+            }
+            let comparePassword = bcrypt.compareSync(password, user.password)
+            if (!comparePassword) {
+                return next(ApiError.internal('Неверный пароль'))
+            }
+            const token = generateJwt(user.id, user.email, user.name, user.role, user.group, user.img)
+            return res.json({token})  
+            
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+
     }
 
     async check(req, res, next){
