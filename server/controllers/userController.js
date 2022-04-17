@@ -5,6 +5,7 @@ const path = require('path');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+
 const generateJwt = (id, email, name, role, group) => {
     return jwt.sign(
         {id, email, name, role, group}, 
@@ -60,11 +61,8 @@ class UserController {
     }
 
     async check(req, res, next){
-        const {id} = req.query
-        if (!id) {
-            return next(ApiError.badRequest('Field ID is not set'))
-        }
-        res.json(id);
+       const token = generateJwt(req.user.id, req.user.email, req.user.name, req.user.role, req.user.group, req.user.img)
+       return res.json({token})
     }
 
 
