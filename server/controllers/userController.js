@@ -17,6 +17,11 @@ const generateJwt = (id, email, name, role, group) => {
 class UserController {
     async registration(req, res, next){
         const {email, password, name, role, group} = req.body
+        const {img} = req.files
+        let fileName = uuid.v4() + ".jpg"
+        img.mv(path.resolve(__dirname, '..', 'static', fileName)) //переносим файл с заданным именем в папку 
+
+
         if (!email || !password) {
             return next(ApiError.badRequest('Некорректный email или password'))
         }
@@ -25,13 +30,13 @@ class UserController {
             return next(ApiError.badRequest('Пользователь с таким email уже существует'))
         }
         const hashPassword = await bcrypt.hash(password, 5)
-        const user = await User.create({email, password: hashPassword, name, role, group})
-        const token = generateJwt(user.id, user.email, user.name, user.role, user.group)
+        const user = await User.create({email, password: hashPassword, name, role, group, img: fileName})
+        const token = generateJwt(user.id, user.email, user.name, user.role, user.group, user.img)
             return res.json({token})  
     }
 
     async login(req, res){
-
+        
     }
 
     async check(req, res, next){
