@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import UserStore from './store/UserStore';
 import SubjectStore from './store/SubjectStore';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Context = createContext(null)
 
