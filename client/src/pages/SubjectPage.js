@@ -1,10 +1,13 @@
 import React from 'react';
+import { Card, Container, Image } from 'react-bootstrap';
 
 const SubjectPage = () => {
     return (
-        <div> 
-            SubjectPage
-        </div>
+        <Container> 
+            <Card>
+                <Image> </Image>
+            </Card>
+        </Container>
     );
 };
 

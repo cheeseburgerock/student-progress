@@ -37,7 +37,21 @@ export default class SubjectStore {
                 name: 'Компьютерные сети',
                 description: 'Описание предмета',
                 professor: 'Коваленко Дмитрий Иванович'
-            },                
+            },   
+            
+            {
+                id: 5,
+                name: 'Компьютерные сети',
+                description: 'Описание предмета',
+                professor: 'Коваленко Дмитрий Иванович'
+            },   
+
+            {
+                id: 6,
+                name: 'Компьютерные сети',
+                description: 'Описание предмета',
+                professor: 'Коваленко Дмитрий Иванович'
+            },   
         ]
 
         this._tests = [
