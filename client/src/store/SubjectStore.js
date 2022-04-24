@@ -73,6 +73,12 @@ export default class SubjectStore {
                 description: 'Тест по разделу Речи Посполитой',
                 subjectId: 11
             },      
+            {
+                id: 9,
+                name: 'Тест: Раздел РП',
+                description: 'Тест по разделу Речи Посполитой',
+                subjectId: 11
+            },      
         ]
 
         this._testQuestions = [
