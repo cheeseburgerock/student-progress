@@ -7,19 +7,32 @@ import { OVERVIEW_ROUTE } from '../utils/consts';
 import { NavLink, useHistory } from 'react-router-dom';
 import TestList from '../components/TestList'
 import Test from './Test';
-
+import { firestore } from '../api/firebase';
+import {
+    useCollection,
+    useDocument,
+    useDocumentData,
+  } from 'react-firebase-hooks/firestore';
+    import {
+        addDoc,
+        collection,
+        doc,
+        documentId,
+        getDoc,
+        orderBy,
+        query,
+        where,
+    } from 'firebase/firestore';
 
 const SubjectPage = () => {
     const history = useHistory()        
 
-    const subject=  
-    {
-        id: 11,
-        name: 'История',
-        description: 'Подробное описание дисциплины',
-        professor: 'Наумов Николай Николаевич'
-    }
-
+    const currentCourseId = document.location.pathname.split("/")[2];           //2 это номер отрезаемого элемента  http://localhost:3000/subject/      --->   zvJ5g6mrnbrSfMdmHYB7     <---
+    const currentCourseRef = doc(firestore,"subject", currentCourseId);
+    const [subject] = useDocument(currentCourseRef);
+    const [tests] = useCollection(query(collection(firestore,"test"),where("subjectRef","==", currentCourseRef)));
+    
+   
 
 
 
@@ -32,15 +45,16 @@ const SubjectPage = () => {
                 <div className='mt-5 p-3'>
                     <div>
                         <h1 style={{ color: 'white' }}>
-                            {subject.name}    
+                            {subject?.data().name}    
                         </h1>
                     </div>  
                 </div>
             </Card>
             <Card style={{width: 1280}} className='m-auto mt-2'>
-                <div className='m-3' key={subject.id}>
-                    Описание: {subject.description}
+                <div className='m-3' key={subject?.ref.id}>
+                    Описание: {subject?.data().description}
                 </div>
+    
             </Card>
 
 

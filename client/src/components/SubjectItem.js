@@ -6,11 +6,11 @@ import { observer } from "mobx-react-lite";
 import { Button, Card, Col, Container, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SUBJECT_ROUTE } from '../utils/consts';
-import cardpic from '../assets/cardpic.png'
+import cardpic from '../assets/cardpic.png';
 
 
 const SubjectItem =  ({subject}) => {
-    const history = useHistory()                                //для перехода на другие страницы
+    const history = useHistory();                                //для перехода на другие страницы
     
     return (
         <Col md={3} className={"mt-4"}>
@@ -18,7 +18,7 @@ const SubjectItem =  ({subject}) => {
             <Card.Img variant="top" src={cardpic} />
             <Card.Body>
                 
-                <Card.Title> {subject.data().name}</Card.Title>
+                <Card.Title> {subject.data().name} </Card.Title>
                 <div class="text-secondary">
                     Преподаватель:
                 </div>
