@@ -3,14 +3,13 @@ import Auth from "./pages/Auth";
 import Overview from "./pages/Overview";
 import SubjectPage from "./pages/SubjectPage";
 import Test from "./pages/Test";
+import TestQuestion from "./pages/TestQuestion";
 import UserPage from "./pages/UserPage";
-import { ADMIN_ROUTE, LOGIN_ROUTE, OVERVIEW_ROUTE, REGISTRATION_ROUTE, SUBJECT_ROUTE, TEST_ROUTE, USER_ROUTE } from "./utils/consts";
+
+import { ADMIN_ROUTE, LOGIN_ROUTE, OVERVIEW_ROUTE, REGISTRATION_ROUTE, SUBJECT_ROUTE, TEST_ROUTE, USER_ROUTE, TESTQUESTION_ROUTE } from "./utils/consts";
 
 export const authRoutes = [
-    {   
-        path: ADMIN_ROUTE,
-        Component: Admin
-    },
+   
    /*  {   
         path: TEST_ROUTE + '/:id',
         Component: Test
@@ -43,4 +42,13 @@ export const publicRoutes = [
         Component: Test
     },
 
+    {   
+        path: ADMIN_ROUTE,
+        Component: Admin
+    },
+
+    {   
+        path: TESTQUESTION_ROUTE + '/:id',
+        Component: TestQuestion
+    },
 ]

@@ -24,6 +24,8 @@ import {
         where,
     } from 'firebase/firestore';
 
+    
+
 const SubjectPage = () => {
     const history = useHistory()        
 
@@ -32,7 +34,9 @@ const SubjectPage = () => {
     const [subject] = useDocument(currentCourseRef);
     const [tests] = useCollection(query(collection(firestore,"test"),where("subjectRef","==", currentCourseRef)));
     
-   
+    function getCurrentCourseId(){                                              //Как ее передать в Test.js, чтобы сделать кнопку back?
+       return currentCourseId
+   }
 
 
 
@@ -53,6 +57,7 @@ const SubjectPage = () => {
             <Card style={{width: 1280}} className='m-auto mt-2'>
                 <div className='m-3' key={subject?.ref.id}>
                     Описание: {subject?.data().description}
+                    
                 </div>
     
             </Card>
