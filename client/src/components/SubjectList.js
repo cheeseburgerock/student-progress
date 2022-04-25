@@ -7,7 +7,6 @@ import { Container, Row, Button, Nav} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SubjectItem from './SubjectItem';
 
-
 const SubjectList =  observer(() => {
     const {subject} = useContext(Context)
     return (
@@ -18,7 +17,8 @@ const SubjectList =  observer(() => {
             
         </Row>
     );
-    
 });
+
+
 
 export default SubjectList;

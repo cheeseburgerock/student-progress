@@ -20,11 +20,8 @@ const SubjectPage = () => {
         professor: 'Наумов Николай Николаевич'
     }
 
-    const test= [
-        
-    ]
 
-/* style={{width: 550}} className="p-5" */
+
 
     return (
         <Container className='mt-2'> 

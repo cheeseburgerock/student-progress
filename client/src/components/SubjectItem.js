@@ -9,12 +9,8 @@ import { SUBJECT_ROUTE } from '../utils/consts';
 import cardpic from '../assets/cardpic.png'
 
 
-
 const SubjectItem =  ({subject}) => {
     const history = useHistory()                                //для перехода на другие страницы
-
-
-
     
     return (
         <Col md={3} className={"mt-4"}>
@@ -37,7 +33,6 @@ const SubjectItem =  ({subject}) => {
             </Card>
         </Col>
     );
-    
 };
 
 export default SubjectItem;
