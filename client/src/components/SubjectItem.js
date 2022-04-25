@@ -18,12 +18,14 @@ const SubjectItem =  ({subject}) => {
             <Card.Img variant="top" src={cardpic} />
             <Card.Body>
                 
-                <Card.Title> {subject.name}</Card.Title>
+                <Card.Title> {subject.data().name}</Card.Title>
                 <div class="text-secondary">
                     Преподаватель:
                 </div>
                 <div class="text-secondary">
-                    {subject.professor}
+                    {subject.data().professor} 
+
+    
                 </div>
                 <Card.Text>
                 
