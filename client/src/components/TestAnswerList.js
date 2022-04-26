@@ -6,6 +6,8 @@ import { observer } from "mobx-react-lite";
 import { Container, Row, Button, Nav, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TestQuestionItem from './TestQuestionItem';
+import TestAnswerItem from './TestAnswerItem';
+
 
 import { firestore } from '../api/firebase';
 import {
@@ -27,21 +29,19 @@ import {
 
 const TestAnswerList =  observer(() => {
     
-    const currentTestId = document.location.pathname.split("/")[2];          
-    const currentTestRef = doc(firestore,"test", currentTestId);
-    const [curTest] = useDocument(currentTestRef);
-    const [testQuestions] = useCollection(query(collection(firestore,"testQuestion"),where("testRef","==", currentTestRef)));
+    const currentTestQuestionId = document.location.pathname.split("/")[2];          
+    const currentTestQuestionRef = doc(firestore,"testQuestion", currentTestQuestionId);
+    const [curTestQuestion] = useDocument(currentTestQuestionRef);
+    const [testAnswers] = useCollection(query(collection(firestore,"testAnswer"),where("testQuestionRef","==", currentTestQuestionRef)));
 
 
     return (
         <Row className="d-flex">
-
-            {testQuestions?.docs.map(testQuestion => 
+            {testAnswers?.docs.map(testAnswer => 
                  <div className="d-flex">
-                    <TestQuestionItem key={testQuestion.id} testQuestion={testQuestion} /> 
+                    <TestAnswerItem key={testAnswer.id} testAnswer={testAnswer} /> 
                  </div>
             )}
-
         </Row>
     );
 });

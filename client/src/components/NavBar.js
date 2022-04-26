@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import { Button } from 'react-bootstrap';
 import { Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import  { signOutUser }  from '../api/auth';
 
 
 
@@ -29,6 +30,7 @@ const NavBar =  observer(() => {
                             </Button>
                         <Button 
                             variant= {"outline-light"}
+                            onClick={signOutUser}
                             >
                                 Выйти
                             </Button>  

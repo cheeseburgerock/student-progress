@@ -25,6 +25,9 @@ const TestQuestionItem =  ({testQuestion}) => {
                             {testQuestion.data().name} 
                         </div>
                         <div>
+                            Статус:
+                        </div>
+                        <div>
                             <Button
                                 className='align-self-end' 
                                 variant="primary" 

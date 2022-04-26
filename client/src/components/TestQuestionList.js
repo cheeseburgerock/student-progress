@@ -36,13 +36,11 @@ const TestQuestionList =  observer(() => {
 
     return (
         <Row className="d-flex">
-
             {testQuestions?.docs.map(testQuestion => 
                  <div className="d-flex">
                     <TestQuestionItem key={testQuestion.id} testQuestion={testQuestion} /> 
                  </div>
             )}
-
         </Row>
     );
 });

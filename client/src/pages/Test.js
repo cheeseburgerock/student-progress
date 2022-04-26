@@ -37,7 +37,7 @@ const Test = () => {
                 </div> 
                 <div className='mt-1 p-2'>
                     <h1 style={{ color: 'white' }}>
-                        {test?.data().name}                                 {/* НАЗВАНИЕ ТЕСТА */}                                 
+                        {test?.data().name}                                                               
                     </h1>
                 </div>
             </Card>
