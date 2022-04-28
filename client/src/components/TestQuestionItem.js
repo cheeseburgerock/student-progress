@@ -25,11 +25,8 @@ const TestQuestionItem = ({ testQuestionSnap, handler, index }) => {
         <div className='m-3'>
           <div>
             <h2> {testQuestionSnap.data().name}</h2>
-            
           </div>
-          <div>
-            Статус: Ответ зачтен/не зачтен
-          </div>
+          
           <div className="d-flex justify-content-center align-items-center">
             <TestAnswerList question={testQuestionSnap} handler={answerHandler} />
           </div>
