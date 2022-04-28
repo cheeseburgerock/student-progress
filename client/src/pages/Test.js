@@ -33,7 +33,7 @@ const Test = () => {
 
     return (
         <Container className='mt-2'> 
-            <Card style={{ background: `url(${grayBackground})`, height: 150, width: 1280}} className='m-auto'>
+            <Card style={{ background: `url(${grayBackground})`, height: 150, width: 720}} className='m-auto'>
                 <div className='m-3'>
                     <Button variant="outline-light" onClick={() => history.push(SUBJECT_ROUTE + "/" + getCurrentCourseId())}>Назад</Button>
                 </div> 
@@ -43,14 +43,15 @@ const Test = () => {
                     </h1>
                 </div>
             </Card>
-            <Card style={{width: 1280}} className='m-auto mt-2'>
+            <Card style={{width: 720}} className='m-auto mt-2'>
                 <div className='m-3' key={test?.data().id}>
                     Описание: {test?.data().description}
                 </div>
             </Card>
-            <Col style={{width: 1280}} className='m-auto mt-2'>
+            <Col style={{width: 720}} className='m-auto mt-2'>
                 <TestQuestionList/>
             </Col>
+           
         </Container>
     );
 };

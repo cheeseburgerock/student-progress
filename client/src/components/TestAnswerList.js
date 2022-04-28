@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../index";
 import { NavLink } from "react-router-dom";
 import { OVERVIEW_ROUTE } from "../utils/consts";
 import { observer } from "mobx-react-lite";
-import { Container, Row, Button, Nav, Card } from "react-bootstrap";
+import { Container, Row, Button, Nav, Card, ToggleButton, ButtonGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import TestQuestionItem from "./TestQuestionItem";
 import TestAnswerItem from "./TestAnswerItem";
@@ -41,21 +41,27 @@ const TestAnswerList = ({ question, handler }) => {
   );
 
   const rightAnswerHandler = (index) => {
-    const right = index === question.isRight;
+    const right = index === question.data().isRight;
+    setCheck(index);
     handler(right);
   };
   const ar = [1, 2, 3];
+
+  const [check, setCheck]= useState()
 
   return (
     <div >
       {/* <h1> eto testAnswerlist</h1> */}
   
       {console.log(question.data().answers)}
-       {question?.data().answers?.map((testAnswer, index) =>                                     // что с answers
-                 {return <div>
-                    <TestAnswerItem key={index} testAnswerSnap={testAnswer} id={index} handler={rightAnswerHandler} /> 
-                 </div>}
-            )}
+      <ButtonGroup vertical>
+        {question?.data().answers?.map((testAnswer, index) =>                                     
+                  {return <div>
+                      <TestAnswerItem key={index} testAnswerSnap={testAnswer} id={index} handler={rightAnswerHandler} radioValue={check} /> 
+                  </div>}
+        )}
+      </ButtonGroup>
+       
     </div>
   );
 };

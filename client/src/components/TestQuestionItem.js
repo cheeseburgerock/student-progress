@@ -11,12 +11,12 @@ import { TESTQUESTION_ROUTE } from "../utils/consts";
 import TestQuestionList from "./TestQuestionList";
 import TestAnswerList from "./TestAnswerList";
 
-const TestQuestionItem = ({ testQuestionSnap, handler }) => {
+const TestQuestionItem = ({ testQuestionSnap, handler, index }) => {
   const { subject } = useContext(Context);
   const history = useHistory();
 
   const answerHandler = (right) => {
-    handler(testQuestionSnap?.id, right);
+    handler(index, right);
   };
 
   return (
@@ -31,7 +31,7 @@ const TestQuestionItem = ({ testQuestionSnap, handler }) => {
             Статус: Ответ зачтен/не зачтен
           </div>
           <div className="d-flex justify-content-center align-items-center">
-            <TestAnswerList question={testQuestionSnap} handler={handler} />
+            <TestAnswerList question={testQuestionSnap} handler={answerHandler} />
           </div>
           
         </div>
