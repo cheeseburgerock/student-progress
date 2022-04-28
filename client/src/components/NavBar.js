@@ -9,12 +9,24 @@ import { Button } from 'react-bootstrap';
 import { Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import  { signOutUser }  from '../api/auth';
+import { auth, firestore } from '../api/firebase';
+import {
+    signOut,
+  } from 'firebase/auth';
 
 
 
 const NavBar =  observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
+
+    const signOutHandler = async () => {
+        /* event.preventDefault(); */
+        await signOutUser().then(window.open('/login'));
+        
+        // await signOutUser();
+    };
+
     return (
         <Navbar bg="primary" variant="dark">
             <Container>
@@ -30,7 +42,7 @@ const NavBar =  observer(() => {
                             </Button>
                         <Button 
                             variant= {"outline-light"}
-                            onClick={signOutUser}
+                            onClick={e => signOutHandler()}
                             >
                                 Выйти
                             </Button>  

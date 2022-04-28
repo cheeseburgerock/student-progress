@@ -6,7 +6,7 @@ import {
     signOut,
   } from 'firebase/auth';
 import { createAccount } from './account';
-import { auth, firestore } from './firebase';
+import { auth, firestore} from './firebase';
 
 
 export const createAuth = async (email, password) => {
@@ -16,9 +16,9 @@ export const createAuth = async (email, password) => {
 };
 
 export const signIn = async (email, password) => {  
-      await setPersistence(auth, browserLocalPersistence);
+      // await setPersistence(auth, browserLocalPersistence);
       const user = await signInWithEmailAndPassword(auth, email, password);
-      return { answer: user.user.uid };
+      return { answer: user.user.uid };  
   };
 
   export const signOutUser = async () => {

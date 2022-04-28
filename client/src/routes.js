@@ -14,17 +14,7 @@ export const authRoutes = [
         path: TEST_ROUTE + '/:id',
         Component: Test
     }, */
-]
 
-export const publicRoutes = [
-    {   
-        path: LOGIN_ROUTE,
-        Component: Auth
-    },
-    {   
-        path: REGISTRATION_ROUTE,
-        Component: Auth
-    },
     {   
         path: OVERVIEW_ROUTE,
         Component: Overview
@@ -51,4 +41,16 @@ export const publicRoutes = [
         path: TESTQUESTION_ROUTE + '/:id',
         Component: TestQuestion
     },
+]
+
+export const publicRoutes = [
+    {   
+        path: LOGIN_ROUTE,
+        Component: Auth
+    },
+    {   
+        path: REGISTRATION_ROUTE,
+        Component: Auth
+    },
+   
 ]

@@ -4,22 +4,25 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 
 import { Context } from '../index';
 import { authRoutes, publicRoutes } from '../routes';
-import { OVERVIEW_ROUTE } from '../utils/consts';
-
+import { OVERVIEW_ROUTE, LOGIN_ROUTE } from '../utils/consts';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { firestore, auth } from '../api/firebase';
 
 const AppRouter = () => {
-    const {user} = useContext(Context)
+    // const {user} = useContext(Context)
 
-    console.log(user)
+
+    const [user] = useAuthState(auth)  
+    // console.log(user.displayName)
     return (
         <Switch>
-            {user.isAuth && authRoutes.map(({path, Component}) =>
+            {user && authRoutes.map(({path, Component}) =>
                 <Route key={path} path={path} component={Component} exact/>
             )}
              {publicRoutes.map(({path , Component}) =>
                 <Route key={path} path={path} component={Component} exact/>
             )}
-            <Redirect to={OVERVIEW_ROUTE}/>
+            {user && <Redirect to={OVERVIEW_ROUTE}/>}
         </Switch> 
     );
 };

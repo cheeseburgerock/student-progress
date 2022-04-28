@@ -34,10 +34,9 @@ import {
         <Row className="d-flex">
             {tests?.docs.map(test => 
                  <div className="d-flex">
-                    <TestItem key={test.id} test={test} /> 
+                    <TestItem key={test.id} testSnap={test} /> 
                  </div>
             )}
-
         </Row>
     );
 });

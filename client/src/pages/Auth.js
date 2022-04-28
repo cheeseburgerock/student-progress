@@ -35,15 +35,15 @@ const Auth = () => {
     const [password, setPassword] = useState('');
 
     const loginHandler = async () =>  {
-        /* event.preventDefault(); */
-         await signIn(login, password).then(v => window.open('/'));
+        // await event.preventDefault();
+        await signIn(login, password).then(window.open('/'));
         /* signInn.isComplete && window.open('/'); */
         
     };
 
     const registerHandler = async () => {
-        /* event.preventDefault(); */
-        await createAuth(login, password).then(v => loginHandler());
+        // await event.preventDefault();
+        await createAuth(login, password).then(loginHandler());
     };
 
     const [user] = useAuthState(auth)               //user.uid  ====>   Получить 

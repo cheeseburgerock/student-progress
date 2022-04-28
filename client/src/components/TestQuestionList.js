@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../index';
 import { NavLink } from 'react-router-dom';
 import { OVERVIEW_ROUTE } from '../utils/consts';
@@ -33,14 +33,23 @@ const TestQuestionList =  observer(() => {
     const [curTest] = useDocument(currentTestRef);
     const [testQuestions] = useCollection(query(collection(firestore,"testQuestion"),where("testRef","==", currentTestRef)));
 
+    /* testQuestions.data() */
+
+
+    const [answers, setAnswers] = useState();
+
+    const questionHandler = (id, right) => {
+        setAnswers(answer => answer[id] = right)
+    }
 
     return (
         <Row className="d-flex">
             {testQuestions?.docs.map(testQuestion => 
                  <div className="d-flex">
-                    <TestQuestionItem key={testQuestion.id} testQuestion={testQuestion} /> 
+                    <TestQuestionItem key={testQuestion.id} testQuestionSnap={testQuestion} handler={questionHandler} /> 
                  </div>
             )}
+
         </Row>
     );
 });

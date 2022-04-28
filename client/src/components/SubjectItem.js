@@ -9,7 +9,7 @@ import { SUBJECT_ROUTE } from '../utils/consts';
 import cardpic from '../assets/cardpic.png';
 
 
-const SubjectItem =  ({subject}) => {
+const SubjectItem =  ({subjectSnap}) => {
     const history = useHistory();                                //для перехода на другие страницы
     
     return (
@@ -18,19 +18,19 @@ const SubjectItem =  ({subject}) => {
             <Card.Img variant="top" src={cardpic} />
             <Card.Body>
                 
-                <Card.Title> {subject.data().name} </Card.Title>
+                <Card.Title> {subjectSnap.data().name} </Card.Title>
                 <div class="text-secondary">
                     Преподаватель:
                 </div>
                 <div class="text-secondary">
-                    {subject.data().professor} 
+                    {subjectSnap.data().professor} 
 
     
                 </div>
                 <Card.Text>
                 
                 </Card.Text>
-                <Button variant="primary" onClick={() => history.push(SUBJECT_ROUTE + '/' + subject.id)}>Перейти</Button>
+                <Button variant="primary" onClick={() => history.push(SUBJECT_ROUTE + '/' + subjectSnap.id)}>Перейти</Button>
             </Card.Body>
             </Card>
         </Col>

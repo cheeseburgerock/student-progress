@@ -32,7 +32,7 @@ const SubjectList =  observer(() => {
             {subjects?.docs.map(subject =>
                 {console.log(subject.data())
                     
-                return (<SubjectItem key={subject.id} subject={subject} /> ) }
+                return (<SubjectItem key={subject.id} subjectSnap={subject} /> ) }
             )}
 
         </Row>
