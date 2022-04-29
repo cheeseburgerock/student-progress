@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import {
   Button,
   Card,
@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import grayBackground from "../assets/grayBackground.png";
 import "bootstrap/dist/css/bootstrap.css";
+import { observer } from "mobx-react-lite";
 
 import { firestore, auth } from "../api/firebase";
 import {
@@ -33,13 +34,30 @@ import {
 } from "firebase/firestore";
 import { async } from "@firebase/util";
 
-const Admin = () => {
+const Admin = observer(() => {
   /* const [answers, setAnswers] = useState([false, false]); */
 
   const [subjectName, setSubjectName] = useState("");
   const [description, setDescription] = useState("");
   const [professor, setProfessor] = useState("");
   const [subjectRef, setSubjectRef] = useState();
+  const [answersCount, setAnswersCount] = useState(["", ""]);
+  const [rightAnswerIndex, setRightAnswerIndex] = useState(-1);
+  const [testDescription, setTestDescription] = useState("");
+  const [testName, setTestName] = useState("");
+
+  const answerUpdate = (value, index) => {
+    setAnswersCount((answer) => {
+      answer[index] = value;
+      return answer;
+    });
+
+    console.log(answersCount);
+  };
+
+  useEffect(() => {
+    window.document.dispatchEvent(new Event("DOMContentLoaded"));
+  }, [answersCount]);
 
   const addSubject = async () => {
     await addDoc(collection(firestore, "subject"), {
@@ -49,7 +67,12 @@ const Admin = () => {
     });
   };
 
-  let curDoc;
+  const addTest = async () => {
+    await addDoc(collection(firestore, "test"), {
+      name: testName,
+      description: testDescription,
+    });
+  };
 
   const deleteDocument = async (uRef) => {
     console.log(uRef);
@@ -136,38 +159,77 @@ const Admin = () => {
       </Card>
 
       <Card style={{ width: 1280 }} className="m-auto mt-2">
+        {" "}
+        {/* Вопросы */}
         <div>
           <div className="m-3">
-            <h1>Тесты</h1>
+            <h1>Тест</h1>
 
-            <h4>Добавить Тест</h4>
+            <h4>Добавить тест</h4>
 
             <InputGroup>
-              <FormControl placeholder="Название теста" />
-              <FormControl placeholder="Описание" />
+              <FormControl
+                placeholder="Название вопроса"
+                onChange={(e) => setTestName(e.target.value)}
+              />
+              {
+                <FormControl
+                  placeholder="Описание"
+                  onChange={(e) => setTestDescription(e.target.value)}
+                />
+              }
             </InputGroup>
-
-            <div className="mt-3 justify-content-between">
+            <h4 className="mt-3">Добавить вопрос</h4>
+            <Card className="mt-3">
               <InputGroup>
-                <FormControl placeholder="Ответ" />
-                <ToggleButton
-                  style={{ width: 100 }}
-                  className="align-self-end"
-                  variant="outline-success"
-                  type="checkbox"
-                  checked={true}
-                  value="1"
-                  active={false}
-                >
-                  Верный ответ
-                </ToggleButton>
+                <FormControl
+                  className="m-3"
+                  placeholder="Вопрос"
+                  onChange={(e) => setTestName(e.target.value)}
+                />
+                {/* <FormControl placeholder="Описание" onChange={e => setTestDescription(e.target.value)}/> */}
               </InputGroup>
-            </div>
-            <div className="mt-3">
-              <Button variant="outline-primary">Добавить вариант ответа</Button>
-            </div>
+              <div className="m-3 justify-content-between">
+                {answersCount.map((answer, index) => {
+                  return (
+                    <InputGroup>
+                      <FormControl
+                        className="mt-2"
+                        placeholder="Вариант ответа"
+                        onChange={(e) => answerUpdate(e.target.value, index)}
+                      />
+                      <ToggleButton
+                        style={{ width: 100 }}
+                        className="align-self-end mt-2"
+                        variant="outline-success"
+                        type="checkbox"
+                        checked={index === rightAnswerIndex}
+                        value="1"
+                        active={false}
+                        onClick={(e) => setRightAnswerIndex(index)}
+                      >
+                        Верный ответ
+                      </ToggleButton>
+                    </InputGroup>
+                  );
+                })}
+              </div>
+              <div className="mt-3 mb-4 d-flex justify-content-center align-items-center">
+                <Button
+                  style={{ width: 1200 }}
+                  variant="outline-primary"
+                  onClick={(e) => {
+                    answerUpdate("", answersCount.length);
+                    setRightAnswerIndex(answersCount.length);
+                  }}
+                >
+                  Добавить вариант ответа
+                </Button>
+              </div>
+            </Card>
             <div className="mt-3">
               <Button variant="outline-primary">Добавить тест</Button>
+              <Button variant="outline-primary">Добавить вопрос</Button>
             </div>
 
             <div className="mt-5">
@@ -188,8 +250,10 @@ const Admin = () => {
           </div>
         </div>
       </Card>
+
+      
     </Container>
   );
-};
+});
 
 export default Admin;
