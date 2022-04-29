@@ -46,6 +46,8 @@ const Admin = observer(() => {
   const [testDescription, setTestDescription] = useState("");
   const [testName, setTestName] = useState("");
 
+  const [testRef, setTestRef] = useState();
+
   const answerUpdate = (value, index) => {
     setAnswersCount((answer) => {
       answer[index] = value;
@@ -80,7 +82,14 @@ const Admin = observer(() => {
     await deleteDoc(doc(firestore, "subject", uRef));
   };
 
+  const deleteTestDocument = async (uRef) => {
+    console.log(uRef);
+
+    await deleteDoc(doc(firestore, "test", uRef));
+  };
+
   const [subjects] = useCollection(query(collection(firestore, "subject")));
+  const [tests] = useCollection(query(collection(firestore, "test")));
 
   return (
     <Container>
@@ -97,6 +106,7 @@ const Admin = observer(() => {
         </div>
       </Card>
       <Card style={{ width: 1280 }} className="m-auto mt-2">
+        {/* ________ПРЕДМЕТ_________ */}
         <div>
           <div className="m-3">
             <h1>Предметы</h1>
@@ -150,7 +160,7 @@ const Admin = observer(() => {
                   variant="outline-danger"
                   onClick={(e) => deleteDocument(subjectRef)}
                 >
-                  Удалить учебный предмет
+                  Удалить выбранный учебный предмет
                 </Button>
               </div>
             </div>
@@ -160,7 +170,7 @@ const Admin = observer(() => {
 
       <Card style={{ width: 1280 }} className="m-auto mt-2">
         {" "}
-        {/* Вопросы */}
+        {/* ____________ТЕСТЫ_____________ */}
         <div>
           <div className="m-3">
             <h1>Тест</h1>
@@ -169,17 +179,19 @@ const Admin = observer(() => {
 
             <InputGroup>
               <FormControl
-                placeholder="Название вопроса"
+                placeholder="Название теста"
                 onChange={(e) => setTestName(e.target.value)}
               />
               {
                 <FormControl
-                  placeholder="Описание"
+                  placeholder="Описание теста"
                   onChange={(e) => setTestDescription(e.target.value)}
                 />
               }
             </InputGroup>
             <h4 className="mt-3">Добавить вопрос</h4>
+
+            {/* __________КАРТА ВОПРОСА___________*/}
             <Card className="mt-3">
               <InputGroup>
                 <FormControl
@@ -227,31 +239,76 @@ const Admin = observer(() => {
                 </Button>
               </div>
             </Card>
+
             <div className="mt-3">
-              <Button variant="outline-primary">Добавить тест</Button>
-              <Button variant="outline-primary">Добавить вопрос</Button>
+              <Button variant="outline-success ">Добавить тест</Button>
+              <Button variant="outline-primary" className="m-2">
+                Добавить вопрос
+              </Button>
             </div>
 
             <div className="mt-5">
               <h4>Удалить тест</h4>
-              <Form.Select aria-label="Default select example">
-                <option>Выберите тест</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setTestRef(e.target.value);
+                }}
+              >
+                {tests?.docs.map((test, index) => {
+                  return (
+                    <option
+                      value={test.ref.id}
+                      key={index}
+                      onChange={(e) => console.log("click")}
+                    >
+                      {test.data().name}
+                    </option>
+                  );
+                })}
               </Form.Select>
 
               <div className="mt-3">
-                <Button variant="outline-danger">
-                  Удалить учебный предмет
+                <Button
+                  variant="outline-danger"
+                  onClick={(e) => deleteTestDocument(testRef)}
+                >
+                  Удалить выбранный тест
                 </Button>
               </div>
             </div>
           </div>
         </div>
       </Card>
-
-      
+      <Card
+        style={{
+          background: `url(${grayBackground})`,
+          height: 150,
+          width: 1280,
+        }}
+        className="m-auto mt-3"
+      >
+        <div className="mt-5 p-4">
+          <h1 style={{ color: "white" }}>результаты тестов</h1>
+        </div>
+      </Card>
+      <Card style={{ width: 1280 }} className="m-auto mt-2">
+        <div className="m-3">
+          <Form.Select aria-label="Default select example">
+            <option>Выберите учебный предмет</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </Form.Select>
+          <Form.Select aria-label="Default select example" className="mt-2">
+            <option>Выберите тест</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </Form.Select>
+        </div>
+      </Card>
     </Container>
   );
 });
