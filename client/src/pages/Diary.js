@@ -35,7 +35,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import TestInfo from "../components/TestInfo";
-import { async } from "@firebase/util";
+import { async, stringify } from "@firebase/util";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const UserPage = () => {
@@ -86,15 +86,15 @@ const UserPage = () => {
         style={{
           background: `url(${grayBackground})`,
           height: 150,
-          width: 1280,
+          width: 720,
         }}
         className="m-auto mt-3"
       >
         <div className="mt-5 p-4">
-          <h1 style={{ color: "white" }}>Дневник</h1>
+          <h1 style={{ color: "white" }}>Умга-бунга</h1>
         </div>
       </Card>
-      <Card style={{ width: 1280 }} className="m-auto mt-2">
+      <Card style={{ width: 720 }} className="m-auto mt-2">
         <div className="m-3">
           {testResult?.docs.map((result, index) => {
             const resultData = result.data();
@@ -115,12 +115,33 @@ const UserPage = () => {
               .catch((err) => {
                 return "sorry";
               });
-            console.log();
+
+            getDocumentData(result.data().user)
+              .then((value) => {
+                // setTestName((testName) => {
+                //   testName[index] = value.name;
+                //   return testName;
+                // });
+                updateDocumentData(result.ref, { userName: value.name });
+                return value;
+              })
+              .catch((err) => {
+                return "sorry";
+              });
+
             return (
-              <Card>
-                <div>Username = </div>
-                <div>testname = {result.data().testName}</div>
-                <div>score {score}</div>
+              <Card className="mt-2">
+                <div className="m-2">
+                  <div>Имя пользователя: {result.data().userName} </div>
+                  <div>Название теста: {result.data().testName}</div>
+                  <div>Оценка: {score}</div>
+                  <div>
+                    Время сдачи:{" "}
+                    {stringify(
+                      result.data().executionDate?.toDate().toDateString()
+                    )}
+                  </div>
+                </div>
               </Card>
             );
           })}

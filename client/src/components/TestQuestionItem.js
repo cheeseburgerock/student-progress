@@ -22,15 +22,17 @@ const TestQuestionItem = ({ testQuestionSnap, handler, index }) => {
   return (
     <>
       <Card style={{ width: 720 }} className="m-auto mt-2 d-flex">
-        <div className='m-3'>
+        <div className="m-3">
           <div>
             <h2> {testQuestionSnap.data().name}</h2>
           </div>
-          
+
           <div className="d-flex justify-content-center align-items-center">
-            <TestAnswerList question={testQuestionSnap} handler={answerHandler} />
+            <TestAnswerList
+              question={testQuestionSnap}
+              handler={answerHandler}
+            />
           </div>
-          
         </div>
       </Card>
       {/* <TestAnswerList question={testQuestion} handler={handler} />   */}

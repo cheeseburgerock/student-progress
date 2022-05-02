@@ -5,6 +5,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
   } from 'firebase/auth';
+  
 import { createAccount } from './account';
 import { auth, firestore} from './firebase';
 
@@ -12,7 +13,7 @@ import { auth, firestore} from './firebase';
 export const createAuth = async (email, password) => {
     const newAcc = await createUserWithEmailAndPassword(auth, email, password);
     console.log(newAcc);
-    await createAccount(newAcc.user.uid);  
+    await createAccount(newAcc.user.uid, email);  
 };
 
 export const signIn = async (email, password) => {  

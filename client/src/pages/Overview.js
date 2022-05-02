@@ -9,7 +9,7 @@ const Overview = () => {
     return (
         <Container> 
            <Row>
-                <h1 className="pt-4">Добрый день, ИМЯ!</h1>
+                <h1 className="pt-4">Добрый день!</h1>
                 <h5 className="pt-4">Выберите доступный предмет: </h5> 
            </Row>
            <SubjectList/>

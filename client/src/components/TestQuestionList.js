@@ -21,6 +21,7 @@ import {
   getDoc,
   orderBy,
   query,
+  serverTimestamp,
   where,
 } from "firebase/firestore";
 
@@ -61,6 +62,7 @@ const TestQuestionList = observer(() => {
       user: currentUserRef,
       test: currentTestRef,
       answers: answers,
+      executionDate: serverTimestamp(),
     });
   };
 

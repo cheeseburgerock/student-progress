@@ -1,9 +1,9 @@
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { firestore } from './firebase';
 
-export const createAccount = async (uid) => {
+export const createAccount = async (uid, email) => {
 
-    await setDoc(doc(firestore, 'user', uid), {name: uid, group: null, role: "student"});    
+    await setDoc(doc(firestore, 'user', uid), {name: email, group: null, role: "student"});    
 }
 
 export const getAccount = async (uid) => {
