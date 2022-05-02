@@ -6,3 +6,5 @@ export const TEST_ROUTE = '/test'
 export const TESTQUESTION_ROUTE = '/testquestion'
 export const SUBJECT_ROUTE = '/subject'
 export const USER_ROUTE = '/user'
+export const DIARY_ROUTE = '/diary'
+
