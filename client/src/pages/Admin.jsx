@@ -288,7 +288,7 @@ const Admin = observer(() => {
               })}
             </Form.Select>
 
-            <InputGroup>
+            <InputGroup className="mt-3">
               <FormControl
                 placeholder="Название теста"
                 onChange={(e) => setTestName(e.target.value)}

@@ -14,7 +14,7 @@ const SubjectItem =  ({subjectSnap}) => {
     
     return (
         <Col md={3} className={"mt-4"}>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ height: 260, width: 280}}>
             <Card.Img variant="top" src={cardpic} />
             <Card.Body>
                 

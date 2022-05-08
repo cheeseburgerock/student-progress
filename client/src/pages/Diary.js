@@ -91,7 +91,7 @@ const UserPage = () => {
         className="m-auto mt-3"
       >
         <div className="mt-5 p-4">
-          <h1 style={{ color: "white" }}>Умга-бунга</h1>
+          <h1 style={{ color: "white" }}>Журнал результатов</h1>
         </div>
       </Card>
       <Card style={{ width: 720 }} className="m-auto mt-2">
@@ -136,7 +136,7 @@ const UserPage = () => {
                   <div>Название теста: {result.data().testName}</div>
                   <div>Оценка: {score}</div>
                   <div>
-                    Время сдачи:{" "}
+                    Дата аттестации:{" "}
                     {stringify(
                       result.data().executionDate?.toDate().toDateString()
                     )}

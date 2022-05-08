@@ -81,7 +81,7 @@ const TestQuestionList = observer(() => {
       <Card style={{ width: 720 }} className="m-auto mt-2">
         <div className="d-flex justify-content-center align-items-center m-3">
           <Button style={{ width: 500 }} onClick={addDocument}>
-            Принять ислам
+            Принять ответ
           </Button>
         </div>
       </Card>
