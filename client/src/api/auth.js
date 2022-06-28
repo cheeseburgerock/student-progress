@@ -17,7 +17,7 @@ export const createAuth = async (email, password) => {
 };
 
 export const signIn = async (email, password) => {  
-      // await setPersistence(auth, browserLocalPersistence);
+      await setPersistence(auth, browserLocalPersistence);
       const user = await signInWithEmailAndPassword(auth, email, password);
       return { answer: user.user.uid };  
   };

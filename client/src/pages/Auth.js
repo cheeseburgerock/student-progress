@@ -32,7 +32,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
 
   const loginHandler = async () => {
-    await signIn(login, password).then(window.open("/"));
+    await signIn(login, password).then(answer => answer && window.location.assign("/"));
   };
 
   const registerHandler = async () => {
